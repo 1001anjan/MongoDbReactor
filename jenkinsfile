@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script { // Enclose shell steps within a script block
+                   sh 'chmod +x ./buildScripts/build.sh' // Grant execute permission
                     sh './buildScripts/build.sh'
                 }
             }
@@ -13,6 +14,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    sh 'chmod +x ./buildScripts/build.sh' // Grant execute permission
                     sh './buildScripts/test.sh'
                 }
             }
