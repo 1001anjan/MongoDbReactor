@@ -1,0 +1,40 @@
+pipeline {
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm // Checkout code from Git
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh ./buildScript/build.sh // Build the Spring Boot application, skipping tests
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh ./buildScript/test.sh // Run tests
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    def deployScriptPath = "./buildScript/deploy.sh"
+                    if (fileExists(deployScriptPath)) {
+                        sh "chmod +x ${deployScriptPath}" // Make the deploy script executable
+                        sh "./${deployScriptPath}" // Run the deploy script
+                    } else {
+                        error "Deploy script not found at ${deployScriptPath}"
+                    }
+                }
+            }
+        }
+    }
+}
+
+def fileExists(filePath) {
+    return file(filePath).exists()
+}
