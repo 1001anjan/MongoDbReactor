@@ -1,30 +1,32 @@
 pipeline {
-    agent any
-
-    environment {
-            SPRING_BOOT_VERSION = '3.1.1'
+    //agent any
+    agent {
+            docker {
+                image 'gradle:jdk17' // Use a Gradle image with JDK 11
+                args '-v /buildScript:/buildScript' // Mount the buildScript directory
+            }
         }
+
 
     stages {
-            stage('Build') {
-                steps {
-                    script {
-                        sh 'chmod +x ./gradlew'
-                        sh "./gradlew clean build -PspringBootVersion=${SPRING_BOOT_VERSION}"
-                    }
+        stage('Build') {
+            steps {
+                script { // Enclose shell steps within a script block
+                   sh 'chmod +x ./buildScripts/build.sh' // Grant execute permission
+                    sh './buildScripts/build.sh'
                 }
             }
-
-            stage('Test') {
-                steps {
-                    script {
-                        sh 'chmod +x ./gradlew'
-                        sh "./gradlew test -PspringBootVersion=${SPRING_BOOT_VERSION}"
-                    }
-                }
-            }
-
-            // Define more stages as needed
         }
 
+        stage('Test') {
+            steps {
+                script {
+                    sh 'chmod +x ./buildScripts/build.sh' // Grant execute permission
+                    sh './buildScripts/test.sh'
+                }
+            }
+        }
+
+        // Define more stages as needed
+    }
 }
