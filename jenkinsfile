@@ -26,6 +26,5 @@ pipeline {
 
             // Define more stages as needed
         }
-    }
 
 }
