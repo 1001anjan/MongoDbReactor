@@ -1,12 +1,5 @@
 pipeline {
-    //agent any
-    agent {
-            docker {
-                image 'gradle:jdk17' // Use a Gradle image with JDK 11
-                args '-v /buildScript:/buildScript' // Mount the buildScript directory
-            }
-        }
-
+    agent any
 
     stages {
         stage('Build') {
