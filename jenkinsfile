@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script { // Enclose shell steps within a script block
-                    sh './buildScript/build.sh'
+                    sh './buildScripts/build.sh'
                 }
             }
         }
@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh './buildScript/test.sh'
+                    sh './buildScripts/test.sh'
                 }
             }
         }
