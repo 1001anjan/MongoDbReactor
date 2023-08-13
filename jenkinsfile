@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-        try{
+                try{
                     stage('Test') {
                                 steps {
                                     script {
@@ -20,7 +20,8 @@ pipeline {
                                     }
                                 }
                             }
-                }finally {
+                }
+                finally {
                          publishHTML(target: [
                                  allowMissing: false, alwaysLinkToLastBuild: true,
                                  keepAll     : true, reportDir: 'build/reports/jacoco',
@@ -35,9 +36,7 @@ pipeline {
                                  reportName: 'Unit Tests'
                          ]
                          )
-                 }
-               }
-             }
+                
         }
 
 
