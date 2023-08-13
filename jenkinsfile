@@ -11,34 +11,29 @@ pipeline {
             }
         }
 
-                try{
-                    stage('Test') {
-                                steps {
-                                    script {
-                                        sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
-                                        sh './buildScripts/test.sh'
-                                    }
-                                }
-                            }
-                }
-                finally {
-                         publishHTML(target: [
-                                 allowMissing: false, alwaysLinkToLastBuild: true,
-                                 keepAll     : true, reportDir: 'build/reports/jacoco',
-                                 reportFiles : 'test/html/index.html',
-                                 reportName: 'Jacoco Report Merged'
-                         ]
-                         )
-                         publishHTML(target: [
-                                 allowMissing: false, alwaysLinkToLastBuild: true,
-                                 keepAll     : true, reportDir: 'build/reports/tests',
-                                 reportFiles : 'test/index.html',
-                                 reportName: 'Unit Tests'
-                         ]
-                         )
-                
-        }
 
+        stage('Test') {
+            steps {
+                script {
+                    sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
+                    sh './buildScripts/test.sh'
+                     publishHTML(target: [
+                                                allowMissing: false, alwaysLinkToLastBuild: true,
+                                                keepAll     : true, reportDir: 'build/reports/jacoco',
+                                                reportFiles : 'test/html/index.html',
+                                                reportName: 'Jacoco Report Merged'
+                                        ]
+                                        )
+                    publishHTML(target: [
+                            allowMissing: false, alwaysLinkToLastBuild: true,
+                            keepAll     : true, reportDir: 'build/reports/tests',
+                            reportFiles : 'test/index.html',
+                            reportName: 'Unit Tests'
+                    ]
+                    )
+                }
+            }
+        }
 
         // Define more stages as needed
     }
