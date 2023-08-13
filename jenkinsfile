@@ -87,13 +87,15 @@ pipeline {
         }
 
 
-       post {
-              failure {
-                  echo "Pipeline failed, marking the build as FAILURE"
-                  currentBuild.result = 'FAILURE'
-              }
-          }
 
 
     }
+
+     post {
+          failure {
+              echo "Pipeline failed, marking the build as FAILURE"
+              currentBuild.result = 'FAILURE'
+          }
+      }
+
 }
