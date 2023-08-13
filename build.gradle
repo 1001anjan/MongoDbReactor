@@ -62,7 +62,6 @@ publishing {
 	repositories {
 		maven {
 			name = "snapshots"
-		//	url = uri("http://localhost:8081/repository/maven-snapshots/")
 			url = uri("http://localhost:8081/repository/test-repo/")
 			credentials {
 				username = "admin"
