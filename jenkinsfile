@@ -50,6 +50,15 @@ pipeline {
                     }
         }
 
+         stage('Dependency Check') {
+                            steps {
+                                script { /// Enclose shell steps within a script block
+                                   sh 'chmod +x ./buildScripts/dependency.sh' // Grant execute permission
+                                    sh './buildScripts/dependency.sh'
+                                }
+                            }
+                }
+
         stage('Deploy') {
                             steps {
                                 script { /// Enclose shell steps within a script block
