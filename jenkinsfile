@@ -59,15 +59,20 @@ pipeline {
                             }
                 }
 
-        post {
-                success {
-                    // Steps to execute on success
-                }
-                failure {
-                    // Steps to execute on failure
-                    step([$class: 'WsCleanup', cleanWhenFailure: false])
+        stage('Cleanup') {
+            steps {
+                script {
+                    // Check if the build result is null (successful)
+                    if (currentBuild.resultIsBetterOrEqualTo('SUCCESS')) {
+                        echo "Build succeeded. Running cleanup..."
+                        step([$class: 'WsCleanup', cleanWhenFailure: false])
+                    } else {
+                        echo "Build failed. No cleanup needed."
+                    }
                 }
             }
+        }
+
 
 
     }
