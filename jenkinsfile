@@ -48,6 +48,17 @@ pipeline {
                             sh './buildScripts/qa.sh'
                         }
                     }
+        }
+
+        stage('Deploy') {
+                            steps {
+                                script { /// Enclose shell steps within a script block
+                                   sh 'chmod +x ./buildScripts/deploy.sh' // Grant execute permission
+                                    sh './buildScripts/deploy.sh'
+                                }
+                            }
                 }
+
+
     }
 }
