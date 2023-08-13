@@ -34,3 +34,11 @@ test {
 jacocoTestReport {
 	dependsOn test
 }
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "test_project"
+		property "sonar.projectName", "test_project"
+		property "sonar.host.url", "http://localhost:9000" // Replace with your SonarQube server URL
+	}
+}

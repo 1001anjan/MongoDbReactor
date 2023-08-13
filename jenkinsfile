@@ -18,15 +18,19 @@ pipeline {
                     sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
                     sh './buildScripts/test.sh'
                      publishHTML(target: [
-                                                allowMissing: false, alwaysLinkToLastBuild: true,
-                                                keepAll     : true, reportDir: 'build/reports/',
+                                                allowMissing: false,
+                                                alwaysLinkToLastBuild: true,
+                                                keepAll     : true,
+                                                reportDir: 'build/reports/',
                                                 reportFiles : 'jacoco/test/html/index.html',
                                                 reportName: 'Jacoco Report Merged'
                                         ]
                                         )
                     publishHTML(target: [
-                            allowMissing: false, alwaysLinkToLastBuild: true,
-                            keepAll     : true, reportDir: 'build/reports/',
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll     : true,
+                            reportDir: 'build/reports/',
                             reportFiles : 'tests/test/index.html',
                             reportName: 'Unit Tests'
                     ]
@@ -36,5 +40,14 @@ pipeline {
         }
 
         // Define more stages as needed
+
+        stage('Sonar Analysis') {
+                    steps {
+                        script { /// Enclose shell steps within a script block
+                           sh 'chmod +x ./buildScripts/qa.sh' // Grant execute permission
+                            sh './buildScripts/qa.sh'
+                        }
+                    }
+                }
     }
 }
