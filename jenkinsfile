@@ -59,12 +59,15 @@ pipeline {
                             }
                 }
 
-        stage('cleanup') {
-                    // build status of null means successful, then cleanup workspace
-                    if(currentBuild?.result == null ) {
-                        step([$class: 'WsCleanup', cleanWhenFailure: false])
-                    }
-              }
+        post {
+                success {
+                    // Steps to execute on success
+                }
+                failure {
+                    // Steps to execute on failure
+                    step([$class: 'WsCleanup', cleanWhenFailure: false])
+                }
+            }
 
 
     }
