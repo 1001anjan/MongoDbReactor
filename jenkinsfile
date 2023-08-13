@@ -14,7 +14,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'chmod +x ./buildScripts/build.sh' // Grant execute permission
+                    sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
                     sh './buildScripts/test.sh'
                 }
             }
