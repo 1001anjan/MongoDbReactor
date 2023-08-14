@@ -36,10 +36,14 @@ tasks.named('test') {
 test {
 	finalizedBy jacocoTestReport
 }
-jacocoTestReport {
-	dependsOn test
-}
 
+jacocoTestReport {
+	reports {
+		xml.required = false
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}
 sonarqube {
 	properties {
 		property("sonar.jacoco.reportPath", "$buildDir/jacoco/test.exec")
@@ -79,7 +83,6 @@ publishing {
 				password = "admin"
 			}
 			allowInsecureProtocol = true
-
 		}
 		maven {
 			name = "releases"
@@ -89,7 +92,6 @@ publishing {
 				password = "admin"
 			}
 			allowInsecureProtocol = true
-
 		}
 	}
 }

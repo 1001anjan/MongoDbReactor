@@ -21,10 +21,10 @@ pipeline {
                                                 allowMissing: false,
                                                 alwaysLinkToLastBuild: true,
                                                 keepAll     : true,
-                                                reportDir: 'build/reports/',
-                                                reportFiles : 'jacoco/test/html/index.html',
-                                                reportName: 'Jacoco Report Merged',
-                                                filesMatch: '**/jacoco/test/html/**'
+                                                reportDir: 'build/jacocoHtml/',
+                                                reportFiles : 'index.html',
+                                                reportName: 'Jacoco Report Merged'
+                                              //  filesMatch: '**/jacoco/test/html/**'
                                         ]
                                         )
                     publishHTML(target: [
