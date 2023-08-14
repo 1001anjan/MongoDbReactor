@@ -21,10 +21,9 @@ pipeline {
                          allowMissing: false,
                          alwaysLinkToLastBuild: true,
                          keepAll: true,
-                         reportDir: 'build/reports/jacoco/test/html/**',
+                         reportDir: 'build/reports/jacoco/test/html/',
                          reportFiles: 'index.html', // Update the path if necessary
                          reportName: 'Jacoco Code Coverage Report',
-                         filesMatch: 'build/reports/jacoco/test/html/**' // Include all resources
                      ])
 
                     publishHTML(target: [
