@@ -17,14 +17,13 @@ pipeline {
                 script {
                     sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
                     sh './buildScripts/test.sh'
-                    step( [ $class: 'JacocoPublisher' ] )
                      publishHTML(target: [
                                                 allowMissing: false,
                                                 alwaysLinkToLastBuild: true,
                                                 keepAll     : true,
-                                                reportDir: 'build/reports/,build/jacoco/',
+                                                reportDir: 'build/reports/',
                                                 reportFiles : 'jacoco/test/html/index.html',
-                                                reportName: 'Jacoco Report',
+                                                reportName: 'Jacoco Report Merged',
                                                 filesMatch: '**/jacoco/test/html/**'
                                         ]
                                         )
@@ -97,4 +96,14 @@ pipeline {
 
 
     }
+
+     post {
+             failure {
+                 script {
+                     echo "Pipeline failed, marking the build as FAILURE"
+                     currentBuild.result = 'FAILURE'
+                 }
+             }
+         }
+
 }

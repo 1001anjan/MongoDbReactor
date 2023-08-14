@@ -55,10 +55,6 @@ sonarqube {
 	}
 }
 
-
-
-
-
 dependencyCheck {
 	//autoUpdate=false
 	cveValidForHours=1
@@ -71,27 +67,30 @@ publishing {
 			artifact jar
 			groupId = 'com.example.mongodb'
 			artifactId = "mongoReactor"
-			version = "1.0.1-releases"
+			version = "1.0.2-snapshots"
 		}
 	}
 	repositories {
-		maven {
-			name = "snapshots"
-			url = uri("http://localhost:8081/repository/test-repo/")
-			credentials {
-				username = "admin"
-				password = "admin"
+		if(version.endsWith("release") || version.endsWith("RELEASE")){
+			maven {
+				name = "snapshots"
+				url = uri("http://localhost:8081/repository/test-repo/")
+				credentials {
+					username = "admin"
+					password = "admin"
+				}
+				allowInsecureProtocol = true
 			}
-			allowInsecureProtocol = true
-		}
-		maven {
-			name = "releases"
-			url = uri("http://localhost:8081/repository/test-repo/")
-			credentials {
-				username = "admin"
-				password = "admin"
+		}else{
+			maven {
+				name = "releases"
+				url = uri("http://localhost:8081/repository/test-repo/")
+				credentials {
+					username = "admin"
+					password = "admin"
+				}
+				allowInsecureProtocol = true
 			}
-			allowInsecureProtocol = true
 		}
 	}
 }
