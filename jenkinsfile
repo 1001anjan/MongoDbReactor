@@ -23,8 +23,8 @@ pipeline {
                          keepAll: true,
                          reportDir: 'build/reports/jacoco/test/html',
                          reportFiles: '**/index.html', // Update the path if necessary
-                         reportName: 'Jacoco Report Merged',
-                         filesMatch: '**/jacoco/test/html/**' // Include all resources
+                         reportName: 'Jacoco Code Coverage Report',
+                         filesMatch: 'build/reports/jacoco/test/html/**' // Include all resources
                      ])
 
                     publishHTML(target: [
