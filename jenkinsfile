@@ -18,15 +18,15 @@ pipeline {
                     sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
                     sh './buildScripts/test.sh'
                      publishHTML(target: [
-                                                allowMissing: false,
-                                                alwaysLinkToLastBuild: true,
-                                                keepAll     : true,
-                                                reportDir: 'build/reports/',
-                                                reportFiles : 'jacoco/test/html/index.html',
-                                                reportName: 'Jacoco Report Merged',
-                                                filesMatch: '**/jacoco/test/html/**'
-                                        ]
-                                        )
+                         allowMissing: false,
+                         alwaysLinkToLastBuild: true,
+                         keepAll: true,
+                         reportDir: 'build/reports/jacoco/test/html',
+                         reportFiles: '**/index.html', // Update the path if necessary
+                         reportName: 'Jacoco Report Merged',
+                         filesMatch: '**/jacoco/test/html/**' // Include all resources
+                     ])
+
                     publishHTML(target: [
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
