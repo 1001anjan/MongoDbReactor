@@ -18,7 +18,16 @@ pipeline {
                     sh 'chmod +x ./buildScripts/test.sh' // Grant execute permission
                     sh './buildScripts/test.sh'
                     step( [ $class: 'JacocoPublisher' ] )
-                     
+                     publishHTML(target: [
+                                                allowMissing: false,
+                                                alwaysLinkToLastBuild: true,
+                                                keepAll     : true,
+                                                reportDir: 'build/reports/,build/jacoco/',
+                                                reportFiles : 'jacoco/test/html/index.html',
+                                                reportName: 'Jacoco Report',
+                                                filesMatch: '**/jacoco/test/html/**'
+                                        ]
+                                        )
                     publishHTML(target: [
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
