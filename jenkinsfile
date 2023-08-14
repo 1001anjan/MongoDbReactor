@@ -21,10 +21,10 @@ pipeline {
                                                 allowMissing: false,
                                                 alwaysLinkToLastBuild: true,
                                                 keepAll     : true,
-                                                reportDir: 'build/jacocoHtml/',
-                                                reportFiles : 'index.html',
-                                                reportName: 'Jacoco Report Merged'
-                                              //  filesMatch: '**/jacoco/test/html/**'
+                                                reportDir: 'build/reports/',
+                                                reportFiles : 'jacoco/test/html/index.html',
+                                                reportName: 'Jacoco Report Merged',
+                                                filesMatch: '**/jacoco/test/html/**'
                                         ]
                                         )
                     publishHTML(target: [
@@ -104,6 +104,17 @@ pipeline {
                      currentBuild.result = 'FAILURE'
                  }
              }
+
+             always {
+                    script {
+                         jacoco(
+                             execPattern: '**/build/jacoco/*.exec',
+                             classPattern: '**/build/classes/**/*.class',
+                             sourcePattern: '**/src/main/java',
+                             inclusionPattern: '**/*'
+                         )
+                     }
+                  }
          }
 
 }
