@@ -23,7 +23,7 @@ pipeline {
                                                 keepAll     : true,
                                                 reportDir: 'build/reports/',
                                                 reportFiles : 'jacoco/test/html/index.html',
-                                                reportName: 'Jacoco Report Merged'
+                                                reportName: 'Jacoco Report Merged',
                                                 filesMatch: '**/jacoco/test/html/**'
                                         ]
                                         )
