@@ -4,8 +4,7 @@ plugins {
 	id "org.sonarqube" version '4.2.0.3129'
 	id 'org.springframework.boot' version '3.1.1'
 	id 'io.spring.dependency-management' version '1.1.0'
-	id "org.cyclonedx.bom" version "1.1.4"
-	id 'com.github.mkep-dev.dependency-track-bom-publish' version "0.1.2"
+	id 'org.owasp.dependencycheck' version '6.0.4'
 }
 apply plugin: 'maven-publish'
 
@@ -52,14 +51,15 @@ sonarqube {
 	}
 }
 
-dtrackPublishBom{
-	host "http://localhost:9090"
-	apiKey "zlWVx2idb6WQ8Ro6a52gTTrEI5HMcWSg"
-	projectUuid "3a3dd618-9707-4fd2-b0aa-c7aeb635108a"
-	//realm "the/realm/of/the/restapi" // Default "api/v1/bom"
-	//bomFile file("path to your bom.xml file relative to project root)" // Default file("reports/bom.xml") (given by the cycloneDx plugin
+
+
+
+
+dependencyCheck {
+	//autoUpdate=false
+	cveValidForHours=1
+	format='HTML'
 }
-publishBom.dependsOn(cyclonedxBom)
 
 publishing {
 	publications {
