@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-./gradlew sonarqube $@
+./gradlew sonarqube $@ || exit 1

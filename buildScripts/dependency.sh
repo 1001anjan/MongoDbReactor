@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-./gradlew dependencyCheckAnalyze $@
+./gradlew dependencyCheckAnalyze $@ || exit 1
