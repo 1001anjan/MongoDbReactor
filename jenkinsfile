@@ -23,6 +23,7 @@ pipeline {
                          keepAll: true,
                          reportDir: 'build/reports/jacoco/test/html/',
                          reportFiles: 'index.html', // Update the path if necessary
+                         includes: "jacoco-resources/*",
                          reportName: 'Jacoco Code Coverage Report',
                      ])
 
